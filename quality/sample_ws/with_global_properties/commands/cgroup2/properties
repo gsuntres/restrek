@@ -1,0 +1,4 @@
+---
+devel:
+  http:
+    timeout: 2999

@@ -1,0 +1,6 @@
+---
+- command: headers.get_headers
+  register:
+    header1: headers['X-Custom-header-1']
+    header2: headers['X-Custom-header-2']
+    header3: headers['X-Custom-header-3']

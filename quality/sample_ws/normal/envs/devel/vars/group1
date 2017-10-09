@@ -1,0 +1,8 @@
+---
+var1:
+  name: This is var1
+  arg1: this is arg1 of var1
+
+var2:
+  name: This is var2
+  arg1: this is arg1 for var2

@@ -1,0 +1,8 @@
+---
+- command: auth.login
+  payload: "{{ user_test }}"
+  register:
+    loggedin_user: body
+    api_key: cookies['token']
+  tests:
+    - assert_eq(200, output['status'])

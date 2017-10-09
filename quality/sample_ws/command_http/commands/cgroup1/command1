@@ -1,0 +1,4 @@
+---
+name: Echo something
+echo:
+  msg: Hello there

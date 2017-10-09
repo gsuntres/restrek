@@ -1,0 +1,4 @@
+jinja2
+PyYAML
+requests
+psycopg2

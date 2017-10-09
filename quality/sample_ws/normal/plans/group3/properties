@@ -1,0 +1,6 @@
+---
+host: www.plan-group3.com
+
+
+devel:
+  host: devel.plan-group3-env.com

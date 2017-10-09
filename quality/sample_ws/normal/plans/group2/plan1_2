@@ -1,0 +1,4 @@
+---
+- command: group1.command1_1
+  data: "{foo: 'bar'}"
+- command: group1.command2_1

@@ -1,0 +1,6 @@
+---
+host: www.aplansscopehost.com
+timeout: 1789
+
+http:
+  host: host.globalscoped.com

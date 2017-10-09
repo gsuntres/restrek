@@ -1,0 +1,20 @@
+build
+dist
+.egg
+.eggs/
+.cache
+__pycache__/
+*.egg
+*.egg-info
+*.pyc
+*.pyo
+*.sublime-workspace
+.tmp
+files.txt
+node_modules
+npm-debug.log
+
+restrek.cfg
+
+# mac os related
+.DS_Store

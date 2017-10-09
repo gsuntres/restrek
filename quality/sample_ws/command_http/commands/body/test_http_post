@@ -1,0 +1,5 @@
+---
+name: Test http post
+http:
+  url: /test_http_post
+  method: POST

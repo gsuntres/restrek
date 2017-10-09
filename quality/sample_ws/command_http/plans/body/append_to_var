@@ -1,0 +1,4 @@
+---
+- command: body.get_entity_by_id
+  register:
+    entity_to_append_to: "{{ entity_to_append_to | combine({'anotherkey': 'anotherval'}) }}"

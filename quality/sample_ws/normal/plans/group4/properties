@@ -1,0 +1,5 @@
+---
+devel:
+  debug: True
+  http:
+    host: www.plan-group4-env-plugin.com

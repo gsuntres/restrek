@@ -1,0 +1,4 @@
+---
+name: Check status 200
+http:
+  url: /status200

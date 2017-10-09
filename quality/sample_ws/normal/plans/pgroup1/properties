@@ -1,0 +1,7 @@
+---
+debug: True
+delay: 15
+
+devel:
+  http:
+    host: www.plan-pgroup1-env-plugin.com

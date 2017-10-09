@@ -1,0 +1,4 @@
+---
+host: www.plan-group2.com
+timeout: 2546
+secure: True

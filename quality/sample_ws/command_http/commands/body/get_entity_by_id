@@ -1,0 +1,4 @@
+---
+name: Get with url param
+http:
+  url: "/entity/{{ entity_id }}"

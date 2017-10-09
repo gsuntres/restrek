@@ -1,0 +1,7 @@
+---
+debug: False
+delay: 20
+
+devel:
+  http:
+    host: www.command-cgroup1-env-plugin.com

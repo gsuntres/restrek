@@ -1,0 +1,5 @@
+---
+http:
+  host: www.plan-group1-plugin.com
+  timeout: 2311
+  secure: False

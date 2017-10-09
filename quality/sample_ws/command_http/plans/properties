@@ -1,0 +1,10 @@
+---
+host: command-http.docker.host:4501
+debug: True
+show_props: True
+
+http:
+  headers:
+    "Content-Type": application/json;charset=utf-8
+    "Accept": application/json;charset=utf-8
+    "Authorization": "Bearer {{ api_key }}"

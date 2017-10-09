@@ -1,0 +1,4 @@
+---
+- command: misc.check_status200
+  tests:
+    - "assert_eq(200, output['status'], 'Status should be 200')"

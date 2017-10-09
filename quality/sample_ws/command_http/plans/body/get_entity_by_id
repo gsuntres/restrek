@@ -1,0 +1,4 @@
+---
+- command: body.get_entity_by_id
+  register:
+    entity_retrieved_by_id: body

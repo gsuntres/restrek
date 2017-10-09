@@ -1,0 +1,4 @@
+---
+name: Return a sample json
+http:
+  url: /get_body

@@ -1,0 +1,14 @@
+---
+user_test:
+  username: test
+  password: test1234
+
+entity_id: 10
+
+http_post_payload:
+  id: 20
+  name: A name
+  age: 80
+
+entity_to_append_to:
+  foo: bar

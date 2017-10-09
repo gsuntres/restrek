@@ -1,0 +1,5 @@
+---
+- command: body.test_http_post
+  payload: "{{ http_post_payload }}"
+  register:
+    posted_data: body

@@ -1,0 +1,5 @@
+---
+- command: group1.command1_1
+  timeout: 500
+  host: dev.hostgp1223.com
+- command: group1.command2_1

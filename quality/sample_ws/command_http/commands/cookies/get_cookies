@@ -1,0 +1,4 @@
+---
+name: Get Cookies
+http:
+  url: /cookies/get_cookies

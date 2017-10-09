@@ -1,0 +1,2 @@
+---
+- command: misc.echo_msg

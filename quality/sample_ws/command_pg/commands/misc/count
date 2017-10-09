@@ -1,0 +1,4 @@
+---
+name: Count pg command
+pg:
+  query: SELECT count(*) FROM table1

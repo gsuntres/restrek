@@ -1,0 +1,4 @@
+---
+name: Delete all
+pg:
+  query: DELETE FROM table1

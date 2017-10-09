@@ -1,0 +1,4 @@
+---
+name: "Group 1 : Command 1"
+http:
+  url: /v1/g1/cmd1

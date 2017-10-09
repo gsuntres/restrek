@@ -1,0 +1,6 @@
+---
+debug: False
+
+devel:
+    echo:
+      show_props: True

@@ -1,0 +1,5 @@
+---
+- command: cookies.get_cookies
+  register:
+    cookie1: cookies['cookie1']
+    cookie2: cookies['cookie2']
