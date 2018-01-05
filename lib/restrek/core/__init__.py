@@ -114,7 +114,7 @@ class RestrekCommand(object):
         out = dict()
         try:
             out[target_kw] = eval(register_statement, {}, context)
-        except (NameError, KeyError) as e:
+        except (NameError, KeyError, IndexError) as e:
             print 'Unknown element %s - %s' % (target_kw, e)
         except SyntaxError as e:
             print 'Invalid syntax %s' % e

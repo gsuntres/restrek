@@ -55,7 +55,7 @@ class TestsManager(object):
             else:
                 display.err('[Assert] %s : %s, %s' % (msg, 'FAILED', failed_reason))
                 display.err('-------\n%r\n-------\n' % ctx)
-        except (NameError, KeyError, TypeError, SyntaxError) as e:
+        except (NameError, KeyError, TypeError, SyntaxError, IndexError) as e:
             display.err('Error: %s - %s' % (test, e))
             display.err('%r' % ctx)
 
