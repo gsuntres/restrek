@@ -67,9 +67,9 @@ class HttpCommand(RestrekCommand):
         try:
             self.set_response(self.do_run(req, self.timeout))
         except ConnectionError as e:
-            print e
+            raise RestrekError(e.message)
         except TypeError as e:
-            print e
+            raise RestrekError(e.message)
 
     def do_run(self, request, timeout=1000):
         req = request.requests_object
