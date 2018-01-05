@@ -2,6 +2,7 @@ import cmd
 import sys
 import httplib
 import restrek.constants as C
+from os.path import join
 from restrek.errors import RestrekError
 from restrek.core.context import RestrekContext
 from restrek.core.services import PlanService
@@ -13,7 +14,11 @@ class RestrekConsole(cmd.Cmd):
                  workspace=C.WS_DIR,
                  env=C.DEFAULT_ENV,
                  verbose=None):
-        self.ctx = RestrekContext(workspace, env, verbose)
+        self.ctx = RestrekContext(join(workspace, C.CMDS_DIR),
+                                  join(workspace, C.PLANS_DIR),
+                                  join(workspace, C.ENVIRONMENTS_DIR),
+                                  env,
+                                  verbose)
         cmd.Cmd.__init__(self)
 
     def cmdloop(self):
