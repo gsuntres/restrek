@@ -32,8 +32,6 @@ class PlanService:
         plan_obj = self.ctx.load_plan(plan_qname.qualifier)
         plan = Plan(plan_obj, plan_qname)
 
-        print 'geo services :: %s' % plan
-
         for step_obj in plan:
             command = None
             if C.COMMAND_KEY in step_obj:
@@ -46,9 +44,7 @@ class PlanService:
             # create step session
             sess = StepSession(step, command)
 
-            print 'geo services :: properties %r' % sess.properties
             if sess.properties is not None and isinstance(sess.properties, dict):
-                print 'geo services :: properties %r' % sess.properties
                 command.props.update(self.ctx.compact_properties(sess.properties, command_descr.plugin))
 
             step_sessions.append(sess)
