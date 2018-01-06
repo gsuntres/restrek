@@ -27,8 +27,9 @@ def command_full_name(name):
 
 def find_command_modules():
     cmd_modules = []
+    print 'gep %s' % os.path.dirname(empty.__file__)
     for file in os.listdir(os.path.dirname(empty.__file__)):
-        if is_python_source(file):
+        if is_valid_command_name(file):
             cmd_modules.append(base(file))
 
     return cmd_modules
@@ -38,5 +39,5 @@ def base(file_name):
     return os.path.splitext(file_name)[0]
 
 
-def is_python_source(name):
-    return name and not name.startswith('_') and name.endswith('.py')
+def is_valid_command_name(name):
+    return name and not name.startswith('__') and not name.endswith('.pyc')

@@ -72,6 +72,7 @@ ENVIRONMENTS_DIR = 'envs'
 
 COMMAND_KEY = 'command'
 PLAN_KEY = 'plan'
+ENV_KEY = 'env'
 TESTS_KEY = 'tests'
 PAYLOAD_KEY = 'payload'
 REGISTER_KEY = 'register'

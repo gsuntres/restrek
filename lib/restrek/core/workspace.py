@@ -3,6 +3,7 @@
 import os
 from os.path import join, isdir, isfile, splitext
 import restrek.constants as C
+from restrek.errors import RestrekError
 import restrek.utils as utils
 
 
@@ -75,7 +76,8 @@ class FileWorkspaceManager(WorkspaceManager):
         self.commands_by_group = dict()
         self.properties_source = {
             C.COMMAND_KEY: {},
-            C.PLAN_KEY: {}
+            C.PLAN_KEY: {},
+            C.ENV_KEY: {}
         }
         self.plans_source = dict()
         self._load()
@@ -120,6 +122,9 @@ class FileWorkspaceManager(WorkspaceManager):
 
         return self.properties_source[C.PLAN_KEY][group] if group in self.properties_source[C.PLAN_KEY] else None
 
+    def get_env_properties_source(self):
+        return self.properties_source[C.ENV_KEY]
+
     @property
     def vars_source(self):
         return self._vars_source.values()
@@ -127,6 +132,7 @@ class FileWorkspaceManager(WorkspaceManager):
     def _load(self):
         self._load_groups_commands()
         self._load_groups_plans()
+        self._load_properies()
         self._load_vars()
 
     def _load_groups_commands(self):
@@ -150,6 +156,12 @@ class FileWorkspaceManager(WorkspaceManager):
                 self.plan_groups[g] = full_path
                 plans = self._load_plans(full_path)
                 self.plans_by_group[g] = plans
+
+    def _load_properies(self):
+        properties_file = join(self.environments_dir, self.env, C.PROPERTIES_NAME)
+        if not os.path.isfile(properties_file):
+            raise RestrekError('Environment {} should have a properties file'.format(self.env))
+        self.properties_source[C.ENV_KEY] = properties_file
 
     def _load_vars(self):
         vars_dir = join(self.environments_dir, self.env, C.VARS_DIR)

@@ -84,19 +84,27 @@ class RestrekContext:
                     self.vars_mgr.update(obj)
 
     def merge_properties(self, command, plan_group=C.GLOBALS_NAME, command_group=None):
+        print 'geo context :: command %s' % command
         plugin = command.plugin if hasattr(command, 'plugin') else None
-        properties = self._get_properties(plan_group, command_group, plugin)
+        properties = self._get_default_properties(plugin)
+        print 'geo context :: default properties %r' % properties
+        possible_properties = self._get_properties(plan_group, command_group, plugin)
+        if possible_properties:
+            properties.update(possible_properties)
         properties.update(command.props)
         c = utils.clone(command)
         c.props = properties
         return c
 
     def compact_properties(self, properties, plugin=None):
+        print 'geo core :: properties (arg) %r ' % properties
         possible_properties = properties.pop(self.env, False)
         if possible_properties:
             properties.update(possible_properties)
         if plugin is not None and plugin in find_command_modules():
+            print 'geo core :: properties %r ' % properties
             possible_properties = properties.pop(plugin, False)
+            print 'geo core :: possible_properties %r ' % possible_properties
             if possible_properties:
                 properties.update(possible_properties)
 
@@ -105,6 +113,14 @@ class RestrekContext:
             properties['debug'] = True
 
         return properties
+
+    def _get_default_properties(self, plugin):
+        props = dict()
+        props_source = self.ws_manager.get_env_properties_source()
+        print 'geo _get_default_properties :: properties_source %r ' % props_source
+        props = self.loader.load_properties(props_source, self.vars_mgr.registered)
+        print 'geo _get_default_properties :: properties %r ' % props
+        return self.compact_properties(props, plugin)
 
     def _get_properties(self, plan_group, command_group, plugin):
         properties = self._get_properties_from_plans(plan_group, plugin)
