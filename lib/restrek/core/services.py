@@ -7,6 +7,9 @@ from restrek.utils import split_name, get_group
 from restrek.core.display import display
 
 
+ALL = 'all'
+
+
 class PlanService:
 
     def __init__(self, ctx):
@@ -62,21 +65,30 @@ class PlanService:
 
         return step_sessions
 
-    def _run_tests(self, tests, data):
-        if tests and isinstance(tests, dict):
-            for a in tests.keys():
-                test_succeeded = self._run_test(a, tests[a], data)
-                if not test_succeeded and not C.CONTINUE_ON_FAIL:
-                    self.should_continue = False
-                    break
-
     def _before_commit(self, sess):
         pass
 
     def _after_commit(self, sess):
         # set about tests
-        if sess.tests and len(sess.tests) > 0 and isinstance(sess.tests, list):
-            gen = self.tests_mgr.assert_tests(sess.tests, sess.output)
+        if sess.tests:
+            tests = []
+            if isinstance(sess.tests, list) and len(sess.tests) > 0:
+                tests += sess.tests
+            else:
+                if isinstance(sess.tests, dict) and ALL in sess.tests:
+                    possible_run_always_tests = sess.tests[ALL]
+                    if isinstance(possible_run_always_tests, list) and len(possible_run_always_tests) > 0:
+                        for t in possible_run_always_tests:
+                            tests.append(t)
+
+                if isinstance(sess.tests, dict) and self.ctx.env in sess.tests:
+                    possible_env_tests = sess.tests[self.ctx.env]
+                    if isinstance(possible_env_tests, list) and len(possible_env_tests) > 0:
+                        env_tests = possible_env_tests
+                    for t in env_tests:
+                        tests.append(t)
+
+            gen = self.tests_mgr.assert_tests(tests, sess.output)
             for test_succeeded in gen:
                 if not test_succeeded and not C.CONTINUE_ON_FAIL:
                     self.should_continue = False
