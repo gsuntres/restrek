@@ -1,6 +1,5 @@
 import re
 from restrek.core.display import display
-import test_lib.common
 
 
 def assert_eq(expected, actual, msg=None):
