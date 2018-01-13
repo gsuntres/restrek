@@ -1,4 +1,6 @@
+import re
 from restrek.core.display import display
+import test_lib.common
 
 
 def assert_eq(expected, actual, msg=None):
@@ -14,6 +16,16 @@ def assert_ex(val, msg=None):
     failed_reason = None
     if not r:
         failed_reason = 'Value `%s` is unkown' % val
+    return r, msg, failed_reason
+
+
+def assert_regex(val, regex='', msg=None):
+    _regex = re.compile(regex, re.I)
+    match = _regex.match(val)
+    r = bool(match)
+    failed_reason = None
+    if not r:
+        failed_reason = 'Value `%s` does not match pattern `%s`' % (val, regex)
     return r, msg, failed_reason
 
 
@@ -35,7 +47,9 @@ class TestsManager(object):
         pass
 
     def _build_context(self, output):
-        ctx = dict(assert_eq=assert_eq, assert_ex=assert_ex)
+        ctx = dict(assert_eq=assert_eq,
+                   assert_ex=assert_ex,
+                   assert_regex=assert_regex)
         ctx.update(output)
         return ctx
 
