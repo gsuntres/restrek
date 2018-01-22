@@ -19,6 +19,7 @@ clean:
 	find . -type f -regex ".*\.py[co]$$" -delete
 	find . -type d -name "__pycache__" -delete
 	find . -type d -name ".tmp" -prune -exec rm -rf '{}' \;
+	find . -type d -name "*.egg-info" -prune -exec rm -rf '{}' \;
 	find . -type d -name .cache -prune -exec rm -rf '{}' \;
 	find . -type d -name .eggs -prune -exec rm -rf '{}' \;
 
