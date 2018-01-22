@@ -42,6 +42,7 @@ setup(name='restrek',
       cmdclass={'test': TestRunner},
       scripts=[
           'bin/restrek',
-          'bin/restrek-console'
+          'bin/restrek-console',
+          'bin/restrek-init'
       ]
       )

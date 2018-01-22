@@ -27,7 +27,6 @@ def command_full_name(name):
 
 def find_command_modules():
     cmd_modules = []
-    print 'gep %s' % os.path.dirname(empty.__file__)
     for file in os.listdir(os.path.dirname(empty.__file__)):
         if is_valid_command_name(file):
             cmd_modules.append(base(file))

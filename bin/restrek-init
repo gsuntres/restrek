@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+import sys
+import os
+from restrek.errors import RestrekError
+import restrek.constants as C
+
+
+def main():
+    ROOT_PATH = os.getcwd()
+    my_command_group = 'my_command_group'
+    my_plan_group = 'my_plan_group'
+    my_command_group_path = os.path.join(ROOT_PATH, C.CMDS_DIR, my_command_group)
+    my_plan_group_path = os.path.join(ROOT_PATH, C.PLANS_DIR, my_plan_group)
+    env_devel_path = os.path.join(ROOT_PATH, C.ENVIRONMENTS_DIR, C.DEFAULT_ENV)
+    env_devel_vars_path = os.path.join(ROOT_PATH, C.ENVIRONMENTS_DIR, C.DEFAULT_ENV, C.VARS_DIR)
+
+    try:
+        # create commands, envs and plans directories
+        os.makedirs(my_command_group_path)
+        os.makedirs(my_plan_group_path)
+        os.makedirs(env_devel_vars_path)
+
+        # create properties file
+        with open(os.path.join(env_devel_path, C.PROPERTIES_NAME), 'w+') as f:
+            f.write('---\n')
+            f.write('debug: True\n\n')
+            f.write('http:\n')
+            f.write('  host: localhost\n')
+            f.write('  headers:\n')
+            f.write('    "Content-Type": application/json;charset=utf-8\n')
+            f.write('    "Accept": application/json;charset=utf-8\n')
+
+        # create command
+        with open(os.path.join(my_command_group_path, 'check'), 'w+') as f:
+            f.write('---\n')
+            f.write('name: Check if API is alive\n')
+            f.write('http: \n')
+            f.write('  url: /check\n')
+
+        # create plan
+        with open(os.path.join(my_plan_group_path, 'test_api'), 'w+') as f:
+            f.write('---\n')
+            f.write('- command: {}.check\n'.format(my_command_group))
+            f.write('  tests:\n')
+            f.write('  - assert_eq(200, status)\n')
+
+        # create Trekfile
+        with open(os.path.join(ROOT_PATH, 'Trekfile'), 'w+') as f:
+            f.write('[run]\n')
+            f.write('plans={}.test_api\n'.format(my_plan_group))
+
+        # create restrek.cfg
+        with open(os.path.join(ROOT_PATH, 'restrek.cfg'), 'w+') as f:
+            f.write('[defaults]\n')
+            f.write('workspace_dir = "{}"\n'.format(ROOT_PATH))
+            f.write('json_pretty = yes\n')
+
+        print 'Restrek project initialized!'
+
+    except os.error as e:
+        print 'Error: %s' % e
+        exit(1)
+
+
+if __name__ == '__main__':
+    main()
