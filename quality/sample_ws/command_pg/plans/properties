@@ -1,0 +1,10 @@
+---
+debug: False
+show_props: False
+
+pg:
+  host: 172.17.0.3
+  port: 5432
+  user: test
+  password: test
+  dbname: mydb

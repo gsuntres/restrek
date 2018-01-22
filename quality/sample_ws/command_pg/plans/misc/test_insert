@@ -1,0 +1,3 @@
+---
+- command: misc.insert
+- command: misc.count

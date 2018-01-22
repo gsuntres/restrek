@@ -1,0 +1,4 @@
+---
+name: Insert pg command
+pg:
+  query: INSERT INTO table1 VALUES (2, 'valllllllllllllllllllllllluuuuuuuuuu1', 'valueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee2')
