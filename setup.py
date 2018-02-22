@@ -38,7 +38,7 @@ setup(name='restrek',
       package_dir={'': 'lib'},
       packages=find_packages('lib'),
       # setup_requires=[] + pytest_runner,
-      tests_require=['pytest', 'docker'],
+      tests_require=['pytest', 'docker', 'mock'],
       cmdclass={'test': TestRunner},
       scripts=[
           'bin/restrek',

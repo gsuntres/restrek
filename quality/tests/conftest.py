@@ -17,6 +17,14 @@ def ctx(tmpdir_factory):
 
 
 @pytest.fixture(scope='module')
+def ctx_ws(tmpdir_factory):
+    target_local_path = tmpdir_factory.mktemp('test_context_ws')
+    target_path = str(target_local_path)
+    copy_main_workspace(target_path)
+    return target_path
+
+
+@pytest.fixture(scope='module')
 def ctx_with_global_properties(tmpdir_factory):
     target_local_path = tmpdir_factory.mktemp('test_context_with_global_properties')
     target_path = str(target_local_path)

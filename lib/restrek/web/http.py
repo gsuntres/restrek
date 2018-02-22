@@ -88,6 +88,6 @@ class HttpResponse(object):
             s += '\n- {}: {}'.format(h, self.headers[h])
         if self.cookies and len(self.cookies) != 0:
             s += '\ncookies:'
-            for c in self.cookies:
-                s += '\n- {}'.format(c)
+            for c in self.cookies.keys():
+                s += '\n- {} : {}'.format(c, self.cookies[c])
         return s

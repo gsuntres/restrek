@@ -54,6 +54,7 @@ CONTINUE_ON_FAIL = get_boolean(p, DEFAULTS_KEY, 'continue_on_fail', False)
 PRETTY_JSON = get_boolean(p, DEFAULTS_KEY, 'json_pretty', False)
 PRINT_COLORS = get_boolean(p, DEFAULTS_KEY, 'print_colors', True)
 PRINT_TIMESTAMP = get_boolean(p, DEFAULTS_KEY, 'print_timestamp', True)
+TEST_PREFIX = get_string(p, DEFAULTS_KEY, 'test_prefix', 'test_')
 
 RESERVED_WORDS = [
     'properties',

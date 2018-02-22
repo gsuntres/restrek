@@ -62,15 +62,14 @@ def strip_ext(name):
 
 
 def split_name(name):
-    """Since template names within commands and plans are not unique we must have
-    To achive this we simply prefix the name with the corresponding group
-    a way to distinguish same named templates accross groups.
-    e.g. mygroup.mytemplate
+    r"""Commands and plans are identified by their group and their actual name
+    So for example if a plan `myplan` is grouped in `mygroup` then its full qualified
+    name is `mygroup.myplan`
 
     this method will extract both group and template name.
     """
     if not name:
-        raise RestrekError('%s not a valid name' % name)
+        raise RestrekError('can\'t split empty names')
 
     words = re.split('\.', name)
     if len(words) == 1:

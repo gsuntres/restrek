@@ -36,7 +36,7 @@ def ensure_container(image):
     id_file = 'container_id_%s' % image
     try:
         id = temp_get_val(id_file)
-        print 'retreive container %s' % id
+        print 'retrieve container %s' % id
         if id:
             container = CLIENT.containers.get(id)
             print 'container %s status %s ' % (container.id, container.status)
@@ -62,7 +62,7 @@ def run_container(image):
     container = None
     try:
         container = CLIENT.containers.run(image, detach=True)
-        print 'container %s span up' % container
+        print 'container %s is up and running' % container
         time.sleep(5)
     except Exception as e:
         print e

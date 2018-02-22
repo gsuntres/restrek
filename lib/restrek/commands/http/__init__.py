@@ -6,6 +6,7 @@ from restrek.errors import RestrekError
 from restrek.core import RestrekCommand, DEFAULT_KEY
 from restrek.utils import milli2sec
 from restrek.web.http import HttpResponse, HttpRequest
+from .cookies import get_cookies_ignore_origin
 # supress ssl verify warning
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -75,16 +76,18 @@ class HttpCommand(RestrekCommand):
         req = request.requests_object
         p = req.prepare()
         r = self.sess.send(p, timeout=milli2sec(timeout))
+
         try:
             body = json.loads(r.text)
         except Exception as e:
             print 'JSON %r' % e
             body = r.text
 
+        cookies = get_cookies_ignore_origin(r)
         return {
             'body': body,
             'headers': r.headers,
-            'cookies': r.cookies,
+            'cookies': cookies,
             'status': r.status_code
         }
 
@@ -96,7 +99,7 @@ class HttpCommand(RestrekCommand):
     def parse_registration_statements(self, registration_statements):
         vars_to_add = dict()
         ctx = dict(body=self.resp.body, status=self.resp.status,
-                   cookies=dict_from_cookiejar(self.resp.cookies), headers=self.resp.headers)
+                   cookies=self.resp.cookies, headers=self.resp.headers)
         try:
             for key in registration_statements:
                 v = self.parse_registration_statement(key, registration_statements[key], ctx)

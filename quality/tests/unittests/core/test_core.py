@@ -99,3 +99,13 @@ def test_qualifier_name_trim():
     assert 'group100' == q.group
     assert 'name200' == q.name
     assert 'group100.name200' == q.qualifier
+
+
+def test_qualifier_name_full():
+    q = QualifierName.from_string('group.plan')
+    assert q.full
+
+
+def test_qualifier_name_not_full():
+    q = QualifierName.from_string('group')
+    assert not q.full

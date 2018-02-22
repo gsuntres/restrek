@@ -48,6 +48,14 @@ class RestrekContext:
     def get_plans(self, group=None):
         return self.ws_manager.get_plans(group)
 
+    def get_test_plans(self):
+        test_plans = []
+        for p in self.get_plans():
+            qname = QualifierName.from_string(p)
+            if(qname.name.startswith(C.TEST_PREFIX)):
+                test_plans.append(p)
+        return test_plans
+
     def get_commands(self, group=None):
         return self.ws_manager.get_commands(group)
 

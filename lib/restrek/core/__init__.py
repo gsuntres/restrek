@@ -44,6 +44,10 @@ class QualifierName(object):
     def qualifier(self):
         return combine_name(self.group, self.name)
 
+    @property
+    def full(self):
+        return self.name is not None and self.group is not None
+
     def __str__(self):
         return self.qualifier
 
