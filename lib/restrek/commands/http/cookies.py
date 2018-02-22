@@ -11,7 +11,6 @@ def get_cookies_ignore_origin(response):
     if 0 == len(cookies) and SET_COOKIE_KEY in response.headers:
         simple_cookie = SimpleCookie(response.headers[SET_COOKIE_KEY])
         for key, morsel in simple_cookie.items():
-            print 'geo %s - %r' % (key, morsel.value)
             cookies[key] = morsel.value
 
     return cookies
