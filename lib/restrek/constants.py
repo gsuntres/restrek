@@ -21,7 +21,6 @@ def load_config_file():
 
     return None, ''
 
-
 def get_config(parser, section, key, default):
     value = default
     if parser is not None:

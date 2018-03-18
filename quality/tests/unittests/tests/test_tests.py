@@ -25,3 +25,10 @@ def test_uuid_regex_failed(tests_mgr):
     v = r.next()
     assert isinstance(v, bool)
     assert not v
+
+
+def test_assert_ex_ok(tests_mgr):
+    r = tests_mgr.assert_tests(["assert_ex(status)"], dict(status=202))
+    v = r.next()
+    assert isinstance(v, bool)
+    assert v
