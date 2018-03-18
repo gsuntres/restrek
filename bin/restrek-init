@@ -31,14 +31,14 @@ def main():
             f.write('    "Accept": application/json;charset=utf-8\n')
 
         # create command
-        with open(os.path.join(my_command_group_path, 'check'), 'w+') as f:
+        with open(os.path.join(my_command_group_path, 'check.yml'), 'w+') as f:
             f.write('---\n')
             f.write('name: Check if API is alive\n')
             f.write('http: \n')
             f.write('  url: /check\n')
 
         # create plan
-        with open(os.path.join(my_plan_group_path, 'test_api'), 'w+') as f:
+        with open(os.path.join(my_plan_group_path, 'test_api.yml'), 'w+') as f:
             f.write('---\n')
             f.write('- command: {}.check\n'.format(my_command_group))
             f.write('  tests:\n')

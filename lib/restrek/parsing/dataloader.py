@@ -24,9 +24,15 @@ class DataLoader:
 
     def load_plan(self, name):
         g, f = utils.split_name(name)
-        path = join(self.plans_dir, g, f)
+        for ext in ['', 'yml', 'yaml']:
+            test_path = join(self.plans_dir, g, f + '.' + ext)
+            if exists(test_path):
+                path = test_path
+                break
+
         if not exists(path):
             raise RestrekError('Plan %s does not exist (%s)' % (name, path))
+
         return yaml_load_file(path)
 
     def load_step(self, obj, data=None):
