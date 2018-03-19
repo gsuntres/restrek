@@ -24,8 +24,9 @@ class DataLoader:
 
     def load_plan(self, name):
         g, f = utils.split_name(name)
-        for ext in ['', 'yml', 'yaml']:
-            test_path = join(self.plans_dir, g, f + '.' + ext)
+        path = ''
+        for ext in C.YAML_EXTS:
+            test_path = join(self.plans_dir, g, f + ext)
             if exists(test_path):
                 path = test_path
                 break

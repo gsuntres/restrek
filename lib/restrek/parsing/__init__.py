@@ -3,6 +3,7 @@ import re
 from os.path import join, exists, getmtime, split
 from jinja2 import TemplateNotFound, Environment, BaseLoader
 from jinja2.loaders import split_template_path
+import restrek.constants as C
 import restrek.utils as utils
 import restrek.parsing.filters
 
@@ -21,7 +22,7 @@ class BaseFileTemplateLoader(BaseLoader):
         ok = exists(path)
 
         if not ok:
-            for ext in ['.yaml', '.yml']:
+            for ext in C.YAML_EXTS:
                 p = path + ext
                 if exists(p):
                     path = p

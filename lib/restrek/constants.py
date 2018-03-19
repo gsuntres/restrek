@@ -80,5 +80,6 @@ PROPERTIES_KEY = 'properties'
 
 INGNORED_EXTS = ('.pyc', '.swp', '.bak', '~', '.rpm', '.md', '.txt')
 IGNORED_FILES = ('COPYING', 'CONTRIBUTING', 'LICENSE', 'README', 'VERSION', 'GUIDELINES')
+YAML_EXTS = ['', '.yaml', '.yml']
 FILENAME_REGEX = '^(\w+)(\.yaml|\.yml)?$'
 GROUP_NAME_REGEG = '^\w+\.\w+$'

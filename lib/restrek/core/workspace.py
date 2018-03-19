@@ -158,7 +158,13 @@ class FileWorkspaceManager(WorkspaceManager):
                 self.plans_by_group[g] = plans
 
     def _load_properies(self):
-        properties_file = join(self.environments_dir, self.env, C.PROPERTIES_NAME)
+        properties_file = ''
+        for ext in C.YAML_EXTS:
+            tmp = join(self.environments_dir, self.env, C.PROPERTIES_NAME + ext)
+            if os.path.isfile(tmp):
+                properties_file = tmp
+                break
+
         if not os.path.isfile(properties_file):
             raise RestrekError('Environment {} should have a properties file'.format(self.env))
         self.properties_source[C.ENV_KEY] = properties_file
