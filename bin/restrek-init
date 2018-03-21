@@ -7,8 +7,8 @@ import restrek.constants as C
 
 def main():
     ROOT_PATH = os.getcwd()
-    my_command_group = 'my_command_group'
-    my_plan_group = 'my_plan_group'
+    my_command_group = 'group1'
+    my_plan_group = 'group1'
     my_command_group_path = os.path.join(ROOT_PATH, C.CMDS_DIR, my_command_group)
     my_plan_group_path = os.path.join(ROOT_PATH, C.PLANS_DIR, my_plan_group)
     env_devel_path = os.path.join(ROOT_PATH, C.ENVIRONMENTS_DIR, C.DEFAULT_ENV)
@@ -21,21 +21,42 @@ def main():
         os.makedirs(env_devel_vars_path)
 
         # create properties file
-        with open(os.path.join(env_devel_path, C.PROPERTIES_NAME), 'w+') as f:
+        with open(os.path.join(env_devel_path, C.PROPERTIES_NAME + '.yml'), 'w+') as f:
             f.write('---\n')
             f.write('debug: True\n\n')
             f.write('http:\n')
-            f.write('  host: localhost\n')
+            f.write('  host: localhost:4123\n')
             f.write('  headers:\n')
             f.write('    "Content-Type": application/json;charset=utf-8\n')
             f.write('    "Accept": application/json;charset=utf-8\n')
 
-        # create command
+        # create commands
         with open(os.path.join(my_command_group_path, 'check.yml'), 'w+') as f:
             f.write('---\n')
             f.write('name: Check if API is alive\n')
             f.write('http: \n')
             f.write('  url: /check\n')
+
+        with open(os.path.join(my_command_group_path, 'post.yml'), 'w+') as f:
+            f.write('---\n')
+            f.write('name: A post call that recieves a payload and returns it\n')
+            f.write('http: \n')
+            f.write('  url: /post_call\n')
+            f.write('  method: POST\n')
+
+        with open(os.path.join(my_command_group_path, 'delete.yml'), 'w+') as f:
+            f.write('---\n')
+            f.write('name: Delete an entity by id\n')
+            f.write('http: \n')
+            f.write('  url: /delete_call/{{ delete__id }}\n')
+            f.write('  method: DELETE \n')
+
+        # create variables
+        with open(os.path.join(env_devel_vars_path, 'common.yml'), 'w+') as f:
+            f.write('---\n')
+            f.write('post_payload: \n')
+            f.write('  name: my name \n')
+            f.write('  age: 120 \n')
 
         # create plan
         with open(os.path.join(my_plan_group_path, 'test_api.yml'), 'w+') as f:
@@ -43,6 +64,18 @@ def main():
             f.write('- command: {}.check\n'.format(my_command_group))
             f.write('  tests:\n')
             f.write('  - assert_eq(200, status)\n')
+            f.write('- command: {}.post\n'.format(my_command_group))
+            f.write('  payload: \"{{ post_payload }}\"\n')
+            f.write('  register: \n')
+            f.write('    delete__id: body[\'id\'] \n')
+            f.write('  tests:\n')
+            f.write('  - assert_eq(200, status)\n')
+            f.write('  - assert_eq(1, body[\'id\'])\n')
+            f.write('  - assert_eq(\"{{ post_payload[\'name\'] }}\", body[\'name\'])\n')
+            f.write('  - assert_eq({{ post_payload[\'age\'] }}, body[\'age\'])\n')
+            f.write('- command: {}.delete\n'.format(my_command_group))
+            f.write('  tests:\n')
+            f.write('  - assert_eq(204, status)\n')
 
         # create Trekfile
         with open(os.path.join(ROOT_PATH, 'Trekfile'), 'w+') as f:

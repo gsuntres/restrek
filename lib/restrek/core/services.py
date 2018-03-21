@@ -42,6 +42,7 @@ class PlanService:
                 command_obj = self.ctx.load_cmd(command_qname.qualifier)
                 command_descr = CommandDescription.from_raw(command_obj)
                 command = self.ctx.merge_properties(command_descr, plan_qname.group, command_qname.group)
+
             step = self.ctx.load_step(step_obj)
 
             # create step session
@@ -52,7 +53,7 @@ class PlanService:
 
             step_sessions.append(sess)
             if not sess.skip:
-                display.title('Invoking step %s' % sess.name)
+                display.title('invoking step %s' % sess.name)
                 self._before_commit(sess)
                 sess.commit()
                 self._after_commit(sess)

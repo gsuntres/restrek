@@ -39,7 +39,11 @@ class DataLoader:
     def load_step(self, obj, data=None):
         source = yaml_dump(obj)
         tpl = self.default_env.from_string(source)
-        output = tpl.render(data) if data else tpl.render()
+        try:
+            output = tpl.render(data) if data else tpl.render()
+        except jinja2.exceptions.UndefinedError as e:
+            raise RestrekError('%s' % e.message)
+
         return yaml_load(output)
 
     def load_cmd(self, name, data=None):

@@ -80,7 +80,6 @@ class HttpCommand(RestrekCommand):
         try:
             body = json.loads(r.text)
         except Exception as e:
-            print 'JSON %r' % e
             body = r.text
 
         cookies = get_cookies_ignore_origin(r)

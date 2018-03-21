@@ -76,8 +76,7 @@ class BaseRunner(object):
 
     def _expand_plans(self, plans):
         expanded_plans = []
-
-        if not plans or len(plans) == 0 or (len(plans) == 1 and '' in plans[0]):
+        if not plans or len(plans) == 0 or (len(plans) == 1 and plans[0] is ''):
             return expanded_plans
 
         for p in plans:

@@ -2,7 +2,7 @@ import pytest
 
 
 def test_check_expand_plans(runner):
-    plans = runner._expand_plans(['group1.plan1'])
+    plans = runner._expand_plans(['group1.plan1_1'])
     assert 1 == len(plans)
 
 

@@ -18,7 +18,7 @@ class HttpRequest(object):
     @data.setter
     def data(self, data):
         if data:
-            self._data = json_dumps(str2dict(data)) if is_json(self.headers) else data
+            self._data = self._dump_data(data)
         else:
             self._data = None
 
@@ -30,6 +30,15 @@ class HttpRequest(object):
             req = Request(self.http_method, self.url, headers=self.headers)
         return req
 
+    def _dump_data(self, data):
+        _d = ''
+        try:
+            _d = json_dumps(str2dict(data)) if is_json(self.headers) else data
+        except Exception as e:
+            print 'can\'t dump %s' % e.message
+
+        return _d
+
     def __str__(self):
         s = '[REQUEST]'
         s += '\n{} {}'.format(self.http_method, self.url)
@@ -37,7 +46,7 @@ class HttpRequest(object):
             s += '\npayload:'
             p = ''
             try:
-                p = json_dumps(str2dict(self._data))
+                p = self.data
             except Exception as e:
                 print e
             s += '\n {}'.format(p)
@@ -81,7 +90,7 @@ class HttpResponse(object):
         try:
             p = json_dumps(self.body)
         except Exception as e:
-            print e
+            p = self.body
         s += '\n {}'.format(p)
         s += '\nheaders:'
         for h in self.headers.keys():
