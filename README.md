@@ -26,7 +26,7 @@ cd myproject
 restrek-init
 ```
 
-*Note: Check this [sandbox-project](git@github.com:gsuntres/restrek-sandbox-project.git)* to quickly run and evaluate the sample project created by `restrek-ini`.
+*Note: Check this [sandbox-project](https://github.com/gsuntres/restrek-sandbox-project) to quickly run and evaluate the sample project created by `restrek-ini`.*
 
  
 
