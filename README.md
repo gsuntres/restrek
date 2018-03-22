@@ -123,7 +123,69 @@ Although the main properties are defined in the environment's directory, they ca
 
 Plans is where the actions begins! A plan can have one or multiple commands and they serve a dual role. They can be used to run a single command to test and evaluate the call being implemented, but they can also contain a series of steps to test business logic, etc.
 
-In our example running `restrek-console` will bring up the main console where we can list and run our plans. Running `list groups` will return all available plan groups and `list plans` all available plans. You can run on or more plans by simple issuing a `run` command followed by the plans fully qualified name, separated by a space, in our example `run group1.test_api`.
+In our example running `restrek-console` will bring up the main console where we can list and run our plans. Running `list groups` will return all available plan groups and `list plans` all available plans. You can run one or more plans by simple issuing a `run` command followed by the plans fully qualified names, separated by a space, in our example `run group1.test_api`.
+
+
+
+#### plans and steps explained
+
+Plans use one or more steps to accomplish their goals. Steps have three main parameters *command*, *register* and *tests*. Under the hood the command is being executed and its output becomes available to the rest of the parameters, the the tests, a list of assertions, run and finally the register assigns values to new or existing variables. Both register and tests have access to the command's output. The output of a command that uses the http module has the following structure:
+
+* **status** - the http status code returned
+* **body** - the body returned. *Note: if it's json is being parsed and returned as an object otherwise as a raw string*
+* **headers** - a dictionary with the response's headers
+* **cookies** - a dictionary with the response's cookies
+
+
+
+
+
+So if we need, for example, to save the entity's name, we've just retrieved, we would do the following
+
+```yaml
+- command: mygroup.retrieve_entity
+  register:
+    myentity_id: body['name']
+  tests:
+  - assert_eq(200, status)
+```
+
+
+
+Now *myentity_id* is defined and globally available.
+
+
+
+It is worth mentioning that register can be used alone within a step, usually to assign fixed values, like so
+
+```yaml
+- register:
+    entity_status: active
+- command: mygrou.retrieve_entity_by_status
+```
+
+
+
+*mygroup/retrieve_entity_by_status*
+
+```yaml
+name: Retrieve entity by status
+http:
+  url: /entity/{{ entity_status }}
+```
+
+
+
+Lastly we can use the *skip* parameter to skip a step, e.g.
+
+```bash
+- command: mygroup.retrieve_entity
+  register:
+    myentity_id: body['name']
+  tests:
+  - assert_eq(200, status)
+  skip: yes
+```
 
 
 
