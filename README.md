@@ -145,14 +145,14 @@ So if we need, for example, to save the entity's name, we've just retrieved, we 
 ```yaml
 - command: mygroup.retrieve_entity
   register:
-    myentity_id: body['name']
+    myentity_name: body['name']
   tests:
   - assert_eq(200, status)
 ```
 
 
 
-Now *myentity_id* is defined and globally available.
+Now *myentity_name* is defined and globally available.
 
 
 
@@ -181,7 +181,7 @@ Lastly we can use the *skip* parameter to skip a step, e.g.
 ```bash
 - command: mygroup.retrieve_entity
   register:
-    myentity_id: body['name']
+    myentity_name: body['name']
   tests:
   - assert_eq(200, status)
   skip: yes
