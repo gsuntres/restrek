@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 from requests import Session
 from requests.exceptions import ConnectionError

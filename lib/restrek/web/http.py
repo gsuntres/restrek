@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from requests import Request
 from restrek.utils.web_utils import is_json as is_json
 from restrek.utils import get_val, str2dict, json_loads, json_dumps

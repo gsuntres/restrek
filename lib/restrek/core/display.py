@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pprint
 import restrek.utils as utils
 import restrek.constants as C

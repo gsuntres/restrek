@@ -182,9 +182,9 @@ def json_loads(json_text):
 
 def json_dumps(json_data):
     if C.PRETTY_JSON:
-        return json.dumps(json_data, indent=2)
+        return json.dumps(json_data, indent=2, ensure_ascii=False).encode('utf8')
     else:
-        return json.dumps(json_data)
+        return json.dumps(json_data, ensure_ascii=False).encode('utf8')
 
 
 def _byteify(data, ignore_dicts=False):
