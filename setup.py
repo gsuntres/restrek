@@ -18,6 +18,19 @@ with open('requirements.txt') as requirements_file:
         print("Problem reading requirements.txt")
         sys.exit(1)
 
+# search commands dir for requirements.txt
+cmd_full_path = os.path.abspath(os.path.join('lib', 'restrek', 'commands'))
+for cmd_dir_name in os.listdir(cmd_full_path):
+    cmd_dir = os.path.join(cmd_full_path, cmd_dir_name)
+    if os.path.isdir(cmd_dir):
+        req_path = os.path.join(cmd_dir, 'requirements.txt')
+        if os.path.exists(req_path):
+            with open(os.path.join(cmd_dir, 'requirements.txt')) as requirements_file:
+                if install_req:
+                    print 'Include requirements.txt from %s' % cmd_dir
+                    install_req += requirements_file.read().splitlines()
+
+
 setup(name='restrek',
       version=__version__,
       description='A simple yet powerful RESTful API testing framework',
