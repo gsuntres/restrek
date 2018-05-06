@@ -97,7 +97,8 @@ class RestrekContext:
         possible_properties = self._get_properties(plan_group, command_group, plugin)
         if possible_properties:
             properties.update(possible_properties)
-        properties.update(command.props)
+        if command.props is not None:
+            properties.update(command.props)
         c = utils.clone(command)
         c.props = properties
         return c
