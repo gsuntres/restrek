@@ -25,7 +25,7 @@ for cmd_dir_name in os.listdir(cmd_full_path):
     if os.path.isdir(cmd_dir):
         req_path = os.path.join(cmd_dir, 'requirements.txt')
         if os.path.exists(req_path):
-            with open(os.path.join(cmd_dir, 'requirements.txt')) as requirements_file:
+            with open(req_path) as requirements_file:
                 if install_req:
                     print 'Include requirements.txt from %s' % cmd_dir
                     install_req += requirements_file.read().splitlines()
