@@ -26,7 +26,7 @@ cd myproject
 restrek-init
 ```
 
-*Note: Check this [sandbox-project](https://github.com/gsuntres/restrek-sandbox-project) to quickly run and evaluate the sample project created by `restrek-ini`.*
+*Note: Check out the [sandbox-project](https://github.com/gsuntres/restrek-sandbox-project) to quickly run and evaluate the sample project created by `restrek-ini`.*
 
  By inspecting the newly created project directory's structure, you'll notice that  it has three main directories: the **commands**, the **plans**, and the **envs** directory.
 
