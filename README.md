@@ -28,15 +28,13 @@ restrek-init
 
 *Note: Check this [sandbox-project](https://github.com/gsuntres/restrek-sandbox-project) to quickly run and evaluate the sample project created by `restrek-ini`.*
 
- 
-
-Inspecting the newly created project directory structure you'll notice that  it has three main directories, the **commands**, **plans** and **envs** directories.
+ By inspecting the newly created project directory's structure, you'll notice that  it has three main directories: the **commands**, the **plans**, and the **envs** directory.
 
 
 
 ## Commands
 
-Commands directory contains the api call definitions, in our example, `check`,  `post_call` and `delete_call` with the following definitions:
+Commands directory contains the api call definitions, which can be found in the above-mentioned `sandbox-project`:  `check`,  `post_call`, and `delete_call`.
 
 
 
@@ -82,19 +80,17 @@ http:
 * **headers**: define headers to use in requests
 * **ssl_verify**: should verify certificates (default: true)
 
-Since most properties are mainly the same between commands, common ones like host, secure, headers, etc can be defined in a separate file called  `properties`. More details about that in the next section.
+Since most properties are the same between commands, common ones like host, secure, headers, etc can be defined in a separate file called  `properties`. You'll find more details about that in the next section.
 
 
 
 ## Environments
 
-Predefined variables and the properties file exist in the target's environment directory. If no environment is specified `devel` is assumed. If needed we can add more environments like `staging` by simply creating the corresponding directory. Variables can be literals, objects or arrays and can be segregated into multiple files
-
-
+Predefined variables and the properties files exist in the target's environment directory. If no environment is specified the `devel` is assumed. If needed we can add more environments like `staging` by simply creating the corresponding directory. Variables can be literals, objects, or arrays and can be segregated into multiple files.
 
 #### properties
 
-This files contains properties shared between commands. In our example the properties file is as follows:
+This file contains properties shared between commands. Going back to our sandbox example the properties file is as follows:
 
 ```yaml
 ---
@@ -109,13 +105,13 @@ http:
 
 
 
-http specifies which properties to use when the http module is being used, which means that all the commands will also be using properties defined in here.
+The http specifies which properties to use when the http module is being used.  This means that all the commands will also be using properties defined here.
 
 
 
 #### overriding properties
 
-Although the main properties are defined in the environment's directory, they can be overridden when placed in a command's group directory. This way you are able to use commands that use different hosts for example. Such functionality is useful when dealing with micro-services or 3rd party apis such as an api gateway.
+Although the main properties are defined in the environment's directory, they can be overridden when placed in a command's group directory. For example you can use commands that use different hosts. Such functionality is useful when dealing with micro-services or 3rd party apis such as an api gateway.
 
 
 
