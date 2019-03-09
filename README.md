@@ -1,6 +1,6 @@
 ## Restrek 
 
-Restrek is a simple yet powerful api tool. It supports the programmer during the api development and at the same time provides mechanisms to facilitate end-to-end testing.
+Restrek is a simple yet powerful API tool. It supports the programmer during the API development and at the same time provides mechanisms to facilitate end-to-end testing.
 
 
 
@@ -28,13 +28,13 @@ restrek-init
 
 *Note: Check out the [sandbox-project](https://github.com/gsuntres/restrek-sandbox-project) to quickly run and evaluate the sample project created by `restrek-ini`.*
 
- By inspecting the newly created project directory's structure, you'll notice that  it has three main directories: the **commands**, the **plans**, and the **envs** directory.
+ By inspecting the newly created project directory's structure, you'll notice that it has three main directories: the **commands**, the **plans**, and the **envs** directory.
 
 
 
 ## Commands
 
-Commands directory contains the api call definitions, which can be found in the above-mentioned `sandbox-project`:  `check`,  `post_call`, and `delete_call`.
+Commands directory contains the API call definitions, which can be found in the above-mentioned `sandbox-project`:  `check`,  `post_call`, and `delete_call`.
 
 
 
@@ -51,7 +51,7 @@ http:
 commands/group1/post.yml
 
 ```yaml
-name: A post call that recieves a payload and returns it
+name: A post call that receives a payload and returns it
 http: 
   url: /post_call
   method: POST
@@ -111,21 +111,21 @@ The http specifies which properties to use when the http module is being used.  
 
 #### overriding properties
 
-Although the main properties are defined in the environment's directory, they can be overridden when placed in a command's group directory. For example you can use commands that use different hosts. Such functionality is useful when dealing with micro-services or 3rd party apis such as an api gateway.
+Although the main properties are defined in the environment's directory, they can be overridden when placed in a command's group directory. For example, you can use commands that use different hosts. Such functionality is useful when dealing with micro-services or 3rd party apis such as an API gateway.
 
 
 
 ## Plans
 
-Plans is where the actions begins! A plan can have one or multiple commands and they serve a dual role. They can be used to run a single command to test and evaluate the call being implemented, but they can also contain a series of steps to test business logic, etc.
+Here is where the action begins! A plan can have one or multiple commands, and they serve a dual role. They can be used to run a single command to test and evaluate the call being implemented, but they can also contain a series of steps to test business logic, etc.
 
-In our example running `restrek-console` will bring up the main console where we can list and run our plans. Running `list groups` will return all available plan groups and `list plans` all available plans. You can run one or more plans by simple issuing a `run` command followed by the plans fully qualified names, separated by a space, in our example `run group1.test_api`.
+In our example running `restrek-console` will bring up the main console where we can list and run our plans. Running `list groups` will return all available plan groups and `list plans` all available plans. You can run one or more plans by simply issuing a `run` command followed by the plans fully qualified names, separated by a space, in our example `run group1.test_api`.
 
 
 
 #### plans and steps explained
 
-Plans use one or more steps to accomplish their goals. Steps have three main parameters *command*, *register* and *tests*. Under the hood the command is being executed and its output becomes available to the rest of the parameters, the the tests, a list of assertions, run and finally the register assigns values to new or existing variables. Both register and tests have access to the command's output. The output of a command that uses the http module has the following structure:
+Plans use one or more steps to accomplish their goals. Steps have three main parameters *command*, *register* and *tests*. Under the hood, the command is being executed, and its output becomes available to the rest of the parameters, the tests, a list of assertions, run and finally the register assigns values to new or existing variables. Both register and tests have access to the command's output. The output of a command that uses the http module has the following structure:
 
 * **status** - the http status code returned
 * **body** - the body returned. *Note: if it's json is being parsed and returned as an object otherwise as a raw string*
@@ -136,7 +136,7 @@ Plans use one or more steps to accomplish their goals. Steps have three main par
 
 
 
-So if we need, for example, to save the entity's name, we've just retrieved, we would do the following
+So if we need, for example, to save the entity's name, we've just retrieved, we would do the following:
 
 ```yaml
 - command: mygroup.retrieve_entity
@@ -172,7 +172,7 @@ http:
 
 
 
-Lastly we can use the *skip* parameter to skip a step, e.g.
+Lastly, we can use the *skip* parameter to skip a step, e.g.
 
 ```bash
 - command: mygroup.retrieve_entity
