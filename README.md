@@ -1,6 +1,6 @@
 ## Restrek 
 
-Restrek is a simple yet powerful API tool. It supports the programmer during the API development and at the same time provides mechanisms to facilitate end-to-end testing.
+Restrek is a simple yet powerful API tool.
 
 
 
